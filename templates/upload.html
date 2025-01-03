@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='upload.css') }}">
+
+</head>
+<header class="header">
+    <h1 class="logo"><a href="index">Loan Prediction</a></h1>
+  <ul class="main-nav">
+      <li><a href="index">Home</a></li>
+      <li><a href="form">Form</a></li>
+      <li><a href="upload">CSV File</a></li>
+      <li><a href="visualization">Visualizations</a></li>
+  </ul>
+</header>
+<body>
+    <div class="container">
+        <h1>CSV File Input</h1>
+        <input type="file" id="fileInput" accept=".csv">
+        <button style="margin-top:10px;" onclick="processCSV()">Download</button>
+    </div>
+    <script>
+        function processCSV() {
+            var fileInput = document.getElementById('fileInput');
+            var file = fileInput.files[0];
+        
+            if (file) {
+                var formData = new FormData();
+                formData.append('file', file);
+        
+                // Send the file to Flask for processing
+                fetch('/process_csv', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => {
+                    // Check if the response is a file (CSV)
+                    if (response.headers.get('Content-Disposition') && response.headers.get('Content-Type').toLowerCase().includes('application/vnd.ms-excel')) {
+                        return response.blob();  // Return the response as a blob
+                    } else {
+                        return response.json().then(data => {
+                            console.log(data);
+                            return Promise.reject(data['message']);
+                        });
+                    }
+                })
+                .then(blob => {
+                    var downloadLink = document.createElement('a');
+                    downloadLink.href = URL.createObjectURL(blob);
+                    downloadLink.download = 'output.csv';
+                    console.log("csv download success");
+                    document.body.appendChild(downloadLink);
+                    downloadLink.click();
+                    document.body.removeChild(downloadLink);
+                })
+                .catch(error => {
+                    alert('Error processing CSV: ' + error);
+                });
+            } else {
+                alert('Please select a CSV file.');
+            }
+        }
+        
+    </script>
+</body>
+</html>

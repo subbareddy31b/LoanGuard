@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<header class="header">
+    <h1 class="logo"><a href="index">Loan Prediction</a></h1>
+  <ul class="main-nav">
+      <li><a href="index">Home</a></li>
+      <li><a href="form">Form</a></li>
+      <li><a href="upload">CSV File</a></li>
+      <li><a href="visualization">Visualizations</a></li>
+  </ul>
+</header>
+<body>
+    <p id="p1">
+        Loan eligibility prediction is a huge problem in the financial sector which has a significant potential in benefitting both lenders and borrowers. 
+        There are various loans a financial sector provides starting from education loan, home loan, car loan etc.
+    </p>
+    <p>
+        In general, lenders such as banks and other financial institutions receive a huge number of loan application daily. 
+        It takes a huge amount of time to consider each user profile and history to approve a loan and it might lead to human errors as well this shows a bad remark on the company. 
+        To make this process easier and less time consuming and as efficient as much as possible by minimizing human prone errors we will be building a machine learning model in evaluating the loan eligibility. 
+        This helps the financial institutions in improving their efficiency in the loan approval process and to decrease their operational costs. 
+    </p>
+    <p>
+        Since we make the loan eligibility process easier and faster for the borrowers this makes a 
+        great impact on the customer satisfaction level. Furthermore, the model helps us in reducing 
+        the risk of giving a loan to potential borrowers who might default the loan, this helps in 
+        reducing the financial loss.
+    </p>
+    <p>
+        We used various Machine Learning Classification Models for exploring the data and by find tuning the parameters
+        of the models we achieved an overall best accuarcy of <b>86%</b> by using <b><i>XGBOOSTER</i></b>. And the models
+        precision, recall and F1-scores are good when compared with the other classificaiton models.
+    </p>
+</body>
+</html>

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">    
+    <link rel="stylesheet" href="{{ url_for('static', filename='form.css') }}">
+</head>
+<header class="header">
+    <h1 class="logo"><a href="index">Loan Prediction</a></h1>
+  <ul class="main-nav">
+      <li><a href="index">Home</a></li>
+      <li><a href="form">Form</a></li>
+      <li><a href="upload">CSV File</a></li>
+      <li><a href="visualization">Visualizations</a></li>
+  </ul>
+</header>
+<body>
+    <div class="container">
+        <h1>Loan Defaulter Predictor</h1>
+        <form id="loanForm">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="loanID">Loan ID:</label>
+                    <input type="text" id="loanID" name="loanID" placeholder="Enter Loan ID" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="Age">Age:</label>
+                    <input type="number" id="Age" name="Age" min="0" placeholder="Enter Your Age" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="Income">Income:</label>
+                    <input type="number" id="Income" name="Income" min="0" placeholder="Enter Income" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="LoanAmount">Loan Amount:</label>
+                    <input type="number" id="LoanAmount" name="LoanAmount" min="0" placeholder="Enter Loan Amount" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="CreditScore">Credit Score:</label>
+                    <input type="number" id="CreditScore" name="CreditScore" min="0" placeholder="Enter Credit Score" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="MonthsEmployed">Months Employed:</label>
+                    <input type="number" id="MonthsEmployed" name="MonthsEmployed" min="0" placeholder="Enter Months employed" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="numCreditLines">Number of Credit Lines:</label>
+                    <input type="number" id="numCreditLines" name="numCreditLines" min="0" placeholder="Enter number of Credit Lines" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="InterestRate">Interest Rate (%):</label>
+                    <input type="number" id="InterestRate" name="InterestRate" min="0" step="0.01" placeholder="Enter Interest Rate" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="loanTerm">Loan Term (in months):</label>
+                    <input type="number" id="loanTerm" name="loanTerm" placeholder="Enter Loan Term" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="DTIRatio">DTI Ratio:</label>
+                    <input type="number" id="DTIRatio" name="DTIRatio" min="0" step="0.01" placeholder="Enter DTI Ratio" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="education">Education:</label>
+                    <select id="education" name="education" required>
+                        <option disabled selected>Select Education Type</option>
+                        <option value="PHD">PHD</option>
+                        <option value="Master's">Master's</option>
+                        <option value="Bachelor's">Bachelor's</option>
+                        <option value="High School">High School</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="employmentType">Employment Type:</label>
+                    <select id="employmentType" name="employmentType" required>
+                        <option disabled selected>Select Employment Type</option>
+                        <option value="Full-time">Full-time</option>
+                        <option value="Part-time">Part-time</option>
+                        <option value="Self-employed">Self-employed</option>
+                        <option value="Unemployed">Unemployed</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="maritalStatus">Marital Status:</label>
+                    <select id="maritalStatus" name="maritalStatus" required>
+                        <option disabled selected>Select Marital Status</option>
+                        <option value="Single">Single</option>
+                        <option value="Divorced">Divorced</option>
+                        <option value="Married">Married</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="loanPurpose">Loan Purpose:</label>
+                    <select id="loanPurpose" name="loanPurpose" required>
+                        <option disabled selected>Select Loan Purpose</option>
+                        <option value="Auto">Auto</option>
+                        <option value="Business">Business</option>
+                        <option value="Education">Education</option>
+                        <option value="Home">Home</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="hasDependent">Has Dependent:</label>
+                    <select id="hasDependent" name="hasDependent" required>
+                        <option disabled selected>Select Option</option>
+                        <option value="YES">YES</option>
+                        <option value="NO">NO</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="hasMortgage">Has Mortgage:</label>
+                    <select id="hasMortgage" name="hasMortgage" required>
+                        <option disabled selected>Select Option</option>
+                        <option value="YES">YES</option>
+                        <option value="NO">NO</option>
+                    </select>
+                </div>     
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="hasCoSigner">Has Co-Signer:</label>
+                    <select id="hasCoSigner" name="hasCoSigner" required>
+                        <option disabled selected>Select Option</option>
+                        <option value="YES">YES</option>
+                        <option value="NO">NO</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <div id="resultContainer">
+                        <label for="result">Potential Defaulter:</label>
+                        <input type="text" id="result" name="result" disabled>
+                    </div>
+                </div>
+                
+            </div>
+
+            <button type="button" onClick="predict()">Predict</button>
+
+        </form>
+        <button id="visualbutton" onclick="visualize()">Visualize Data</button>
+
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        function visualize() {
+            // Get form data
+            var Income = 0
+            var LoanAmount = 0
+            var CreditScore = 0
+            var InterestRate = 0
+            var MonthsEmployed = 0
+            if(document.getElementById('Income').value != ''){
+                Income = document.getElementById('Income').value
+            }
+            if(document.getElementById('LoanAmount').value != ''){
+                LoanAmount = document.getElementById('LoanAmount').value
+            }
+            if(document.getElementById('CreditScore').value != ''){
+                CreditScore = document.getElementById('CreditScore').value
+            }
+            if(document.getElementById('InterestRate').value != ''){
+                InterestRate = document.getElementById('InterestRate').value
+            }
+            if(document.getElementById('MonthsEmployed').value != ''){
+                MonthsEmployed = document.getElementById('MonthsEmployed').value
+            }
+
+            // Redirect to visualize route with form data
+            window.location.href = "/visualization1?Income=" + Income + "&LoanAmount=" + LoanAmount + "&CreditScore="+CreditScore+ "&InterestRate=" + InterestRate + "&MonthsEmployed=" + MonthsEmployed;
+        }
+    </script>
+    <script>
+        function predict() {
+            var formData = $("#loanForm").serializeArray();
+            console.log(formData)
+            var formDataJSON = {};
+            formData.forEach(function(item) {
+                formDataJSON[item.name] = item.value;
+            });
+            console.log(formDataJSON);
+                $.ajax({
+                    type: 'POST',
+                    url: '/predict',
+                    contentType: 'application/json;charset=UTF-8',
+                    data: JSON.stringify(formDataJSON),
+                    success: function(response) {
+                        if(response.result == "No"){
+                            console.log("Your loan is approved")
+                            console.log(response.result);
+                            $("#result").val("Your loan will be approved");
+                            document.getElementById('result').style.color='green';
+                        }else{
+                            console.log("Your loan is not approved based on income, creditscore etc..")
+                            console.log(response.result)
+                            $("#result").val("Your loan will not be approved based on the data provided. Please click below for more details.");
+                            document.getElementById('result').style.color='red';
+                        }
+                    },
+                    error: function(error) {
+                        console.error('Error:', error);
+                    }
+                });
+        }
+    </script>
+    
+</body>
+</html>

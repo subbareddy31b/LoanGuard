@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #00FFFF;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 100px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .chart-container {
+            display: inline-block;
+            width: 300px;
+            height: 300px;
+            margin-right: 20px;
+        }
+
+    </style>
+
+
+</head>
+<header class="header">
+    <h1 class="logo"><a href="index">Loan Prediction</a></h1>
+  <ul class="main-nav">
+      <li><a href="index">Home</a></li>
+      <li><a href="form">Form</a></li>
+      <li><a href="upload">CSV File</a></li>
+      <li><a href="visualization">Visualizations</a></li>
+  </ul>
+</header>
+
+<body>
+    <div class="container">
+        <h1>Data Visualizations</h1>
+
+        <div class="chart-container">
+            <canvas id="barChartI"></canvas>
+        </div>
+
+        <div class="chart-container">
+            <canvas id="barChartLA"></canvas>
+        </div>
+
+        <div class="chart-container">
+            <canvas id="barChartCS"></canvas>
+        </div>
+
+        <div class="chart-container">
+            <canvas id="barChartIR"></canvas>
+        </div>
+
+        <div class="chart-container">
+            <canvas id="barChartME"></canvas>
+        </div>
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        //FOR INCOME
+        var barChartDataI = {
+            labels: {{ bar_chart_dataI.labels | tojson }},
+            datasets: [{
+                label: 'Income',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1,
+                data: {{ bar_chart_dataI.data | tojson }}
+            }]
+        };
+
+        var barChartCtxI = document.getElementById('barChartI').getContext('2d');
+        var barChartI = new Chart(barChartCtxI, {
+            type: 'bar',
+            data: barChartDataI,
+            options: {
+                scales: {
+                    y: {
+                        suggestedMax: Math.max(...barChartDataI.datasets[0].data) + 2,
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        //FOR LoanAmount
+        var bar_chart_dataLA = {
+            labels: {{ bar_chart_dataLA.labels | tojson }},
+            datasets: [{
+                label: 'LoanAmount',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1,
+                data: {{ bar_chart_dataLA.data | tojson }}
+            }]
+        };
+
+        var barChartCtxLA = document.getElementById('barChartLA').getContext('2d');
+        var barChartLA = new Chart(barChartCtxLA, {
+            type: 'bar',
+            data: bar_chart_dataLA,
+            options: {
+                scales: {
+                    y: {
+                        suggestedMax: Math.max(...bar_chart_dataLA.datasets[0].data) + 2,
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        //For CreditScore
+        var bar_chart_dataCS = {
+            labels: {{ bar_chart_dataCS.labels | tojson }},
+            datasets: [{
+                label: 'CreditScore',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1,
+                data: {{ bar_chart_dataCS.data | tojson }}
+            }]
+        };
+
+        var barChartCtxCS = document.getElementById('barChartCS').getContext('2d');
+        var barChartCS = new Chart(barChartCtxCS, {
+            type: 'bar',
+            data: bar_chart_dataCS,
+            options: {
+                scales: {
+                    y: {
+                        suggestedMax: Math.max(...bar_chart_dataCS.datasets[0].data) + 2,
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        //FOR InterestRate
+        var bar_chart_dataIR = {
+            labels: {{ bar_chart_dataIR.labels | tojson }},
+            datasets: [{
+                label: 'InterestRate',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1,
+                data: {{ bar_chart_dataIR.data | tojson }}
+            }]
+        };
+
+        var barChartCtxIR = document.getElementById('barChartIR').getContext('2d');
+        var barChartIR = new Chart(barChartCtxIR, {
+            type: 'bar',
+            data: bar_chart_dataIR,
+            options: {
+                scales: {
+                    y: {
+                        suggestedMax: Math.max(...bar_chart_dataIR.datasets[0].data) + 2,
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        //FOR MonthsEmployed
+        var bar_chart_dataME = {
+            labels: {{ bar_chart_dataME.labels | tojson }},
+            datasets: [{
+                label: 'MonthsEmployed',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1,
+                data: {{ bar_chart_dataME.data | tojson }}
+            }]
+        };
+
+        var barChartCtxME = document.getElementById('barChartME').getContext('2d');
+        var barChartME = new Chart(barChartCtxME, {
+            type: 'bar',
+            data: bar_chart_dataME,
+            options: {
+                scales: {
+                    y: {
+                        suggestedMax: Math.max(...bar_chart_dataME.datasets[0].data) + 2,
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
